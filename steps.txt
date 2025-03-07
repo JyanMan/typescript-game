@@ -1,0 +1,17 @@
+These are the steps I will do in this project
+USE REACT FOR THIS
+
+QUIZ APP FOR EDUCATION
+description:
+An app where you can make your own questions, exams
+then simulate them with the option to be randomized
+or in the order you made the questions;
+the type of questions you can make are multiple-choice,
+written, and flashcards;
+Now you can store the questions on some folder and possibly
+also make some notes;
+
+MAKE UI FOR ALL OF THESE (FRONT END)
+*give the ability to make storage / folder to store files / notes;
+*Give the ability to make files to contain notes
+*make exams
