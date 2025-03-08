@@ -11,24 +11,47 @@ class Sprite {
         this.playing = false;
         this.anims = {};
         this.animID = null;
+        this.currentAnim = "none";
+        this.flipX = false;
     }
     draw(ctx, pos) {
         if (this.frame > this.maxFrames) {
             console.error('sprite frame is out of bounds');
             return;
         }
+        ctx.save();
         const frameX = this.frame % this.cols;
-        const frameY = Math.floor(this.frame / this.rows);
-        ctx.drawImage(this.image, frameX * this.frameWidth, frameY * this.frameHeight, this.frameWidth, this.frameHeight, pos.x, pos.y, this.image.width, this.image.height);
+        const frameY = Math.floor(this.frame / this.cols);
+        const frameWidth = this.frameWidth;
+        const frameHeight = this.frameHeight;
+        //draww flipped
+        if (this.flipX) {
+            ctx.scale(-1, 1);
+            ctx.drawImage(this.image, frameX * this.frameWidth, frameY * this.frameHeight, frameWidth, frameHeight, -pos.x, pos.y, -this.image.width, this.image.height); //flipped is negative posx and image width;
+        } //heck this works somehow, idk man, damn!!!
+        else {
+            ctx.drawImage(this.image, frameX * this.frameWidth, frameY * this.frameHeight, frameWidth, frameHeight, pos.x, pos.y, this.image.width, this.image.height);
+        }
+        ctx.restore();
+    }
+    drawFlippedImage(ctx, pos) {
+        ctx.save();
+        ctx.scale(-1, 1);
+        ctx.restore();
     }
     animations(anims) {
         Object.assign(this.anims, anims);
+        console.log(this.anims);
     }
-    play(anim) {
+    play(animName) {
+        const anim = this.anims[animName];
+        if (!anim) {
+            return;
+        }
         this.stop();
         this.frame = anim.from;
         this.playing = true;
-        let interval = 300;
+        let interval = 200;
         if (anim.speed) { //if speed is set
             if (anim.speed < 0) {
                 console.error('speed cannot be less than 0');

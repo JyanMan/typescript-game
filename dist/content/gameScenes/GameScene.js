@@ -19,15 +19,13 @@ class GameScene extends Scene {
                 return;
             }
         }
+        const playerSprite = resources.sprites["player"].animations({
+            idle: { from: 0, to: 5, loop: true },
+            walkHorizontal: { from: 24, to: 29, loop: true },
+            walkSouth: { from: 18, to: 23, loop: true },
+            walkNorth: { from: 30, to: 35, loop: true }
+        });
         this.loaded = true;
-        setInterval(() => {
-            if (this.col >= 5) {
-                this.col = 0;
-            }
-            else {
-                this.col++;
-            }
-        }, 200);
     }
     unload() {
     }
@@ -45,14 +43,6 @@ class GameScene extends Scene {
         const playerSprite = resources.sprites['player'];
         if (playerSprite) {
             playerSprite.draw(ctx, this.player.pos);
-            // if (!playerSprite.playing) {
-            //     playerSprite.play({
-            //         from: 0,
-            //         to: 5,
-            //         loop: true,
-            //         speed: 15,
-            //     })
-            // }
         }
     }
 }

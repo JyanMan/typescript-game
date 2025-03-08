@@ -61,7 +61,23 @@ class Player {
     animations() {
         const playerSprite = resources.sprites["player"];
         if (this.moving) {
-            this.state = "walk";
+            if (this.moveDirection.x !== 0) {
+                this.state = "walkHorizontal";
+                if (this.moveDirection.x < 0) {
+                    playerSprite.flipX = true;
+                }
+                else if (this.moveDirection.x > 0) {
+                    playerSprite.flipX = false;
+                }
+            }
+            if (this.moveDirection.y > 0) {
+                this.state = "walkSouth";
+            }
+            else if (this.moveDirection.y < 0) {
+                this.state = "walkNorth";
+            }
+            //console.log(this.state, this.moveDirection);
+            //this.state = "walk";
         }
         else {
             this.state = "idle";
@@ -69,16 +85,7 @@ class Player {
         if (this.state !== this.animState) {
             //playerSprite.playing = false;
             this.animState = this.state;
-            switch (this.animState) {
-                case "idle":
-                    console.log(this.animState);
-                    playerSprite.play({ from: 0, to: 5, loop: true });
-                    break;
-                case "walk":
-                    console.log(this.animState);
-                    playerSprite.play({ from: 18, to: 23, loop: true });
-                    break;
-            }
+            playerSprite.play(this.animState);
         }
     }
 }

@@ -1,8 +1,2 @@
-export const load = {
-    assets: () => {
-        const playerSprite = new Image();
-        playerSprite.src = '../../assets/Cute_Fantasy_Free/Player/Player.png';
-        playerSprite.setAttribute('id', 'player-sprite');
-    }
-};
+"use strict";
 //# sourceMappingURL=loader.js.map
