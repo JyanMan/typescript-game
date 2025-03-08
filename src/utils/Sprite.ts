@@ -83,7 +83,6 @@ class Sprite {
 
     animations(anims: Record<string, Animation>) {
         Object.assign(this.anims, anims);
-        console.log(this.anims);
     }
 
     play(animName: string) {

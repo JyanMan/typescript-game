@@ -41,7 +41,6 @@ class Sprite {
     }
     animations(anims) {
         Object.assign(this.anims, anims);
-        console.log(this.anims);
     }
     play(animName) {
         const anim = this.anims[animName];
