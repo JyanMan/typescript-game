@@ -14,5 +14,4 @@ function removeAntiAliasing() {
     ctx.imageSmoothingEnabled = false;
 }
 removeAntiAliasing();
-console.log(ctx === null || ctx === void 0 ? void 0 : ctx.imageSmoothingEnabled);
 //# sourceMappingURL=main.js.map

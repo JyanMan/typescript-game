@@ -21,4 +21,3 @@ function removeAntiAliasing() {
     ctx.imageSmoothingEnabled = false;
 }
 removeAntiAliasing();
-console.log(ctx?.imageSmoothingEnabled);
