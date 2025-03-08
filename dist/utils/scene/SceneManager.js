@@ -30,7 +30,7 @@ class SceneManager {
         this.currentScene.update(deltaTime);
         requestAnimationFrame(this.loop.bind(this));
     }
-    async loadScene(newScene) {
+    loadScene(newScene) {
         var _a;
         (_a = this.currentScene) === null || _a === void 0 ? void 0 : _a.unload();
         this.currentScene = newScene;

@@ -15,7 +15,6 @@ class SceneManager {
         this.accumulatedTime = 0;
 
         this.loadScene(initScene);
-        
         requestAnimationFrame(this.loop.bind(this))
     }
 
@@ -45,7 +44,7 @@ class SceneManager {
         requestAnimationFrame(this.loop.bind(this));
     }
     
-    async loadScene(newScene: Scene): Promise<void> {
+    loadScene(newScene: Scene): void {
         this.currentScene?.unload();
         this.currentScene = newScene;
         this.currentScene.load();
