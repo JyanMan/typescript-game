@@ -19,24 +19,22 @@ class Sprite {
             console.error('sprite frame is out of bounds');
             return;
         }
-        ctx.save();
         const frameX = this.frame % this.cols;
         const frameY = Math.floor(this.frame / this.cols);
         const frameWidth = this.frameWidth;
         const frameHeight = this.frameHeight;
-        //draww flipped
+        const imageSize = this.image.width * this.scale;
+        const drawImage = (posX, imageSize) => {
+            ctx.drawImage(this.image, frameX * this.frameWidth, frameY * this.frameHeight, frameWidth, frameHeight, posX, pos.y, imageSize, Math.abs(imageSize));
+        };
+        ctx.save();
         if (this.flipX) {
             ctx.scale(-1, 1);
-            ctx.drawImage(this.image, frameX * this.frameWidth, frameY * this.frameHeight, frameWidth, frameHeight, -pos.x, pos.y, -this.image.width, this.image.height); //flipped is negative posx and image width;
-        } //heck this works somehow, idk man, damn!!!
-        else {
-            ctx.drawImage(this.image, frameX * this.frameWidth, frameY * this.frameHeight, frameWidth, frameHeight, pos.x, pos.y, this.image.width, this.image.height);
+            drawImage(-pos.x, -imageSize);
         }
-        ctx.restore();
-    }
-    drawFlippedImage(ctx, pos) {
-        ctx.save();
-        ctx.scale(-1, 1);
+        else {
+            drawImage(pos.x, imageSize);
+        }
         ctx.restore();
     }
     animations(anims) {

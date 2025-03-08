@@ -5,8 +5,6 @@ import SceneManager from "./utils/scene/SceneManager.js";
 let canvas = document.getElementById('canvas') as HTMLCanvasElement;
 let ctx: CanvasRenderingContext2D | null = canvas?.getContext('2d');
 
-
-
 canvas.width = 854;
 canvas.height = 480;
 

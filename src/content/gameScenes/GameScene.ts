@@ -22,20 +22,7 @@ class GameScene extends Scene {
     }
     
     load() {
-
-        for (const key of Object.keys(resources.toLoad)) {
-            if (!resources.toLoad[key].isLoaded) {
-                requestAnimationFrame(this.load.bind(this));
-                return;
-            }
-        }
-        const playerSprite = resources.sprites["player"].animations({
-            idle: { from: 0, to: 5, loop: true },
-            walkHorizontal: { from: 24, to: 29, loop: true },
-            walkSouth: { from: 18, to: 23, loop: true },
-            walkNorth: { from: 30, to: 35, loop: true }
-        })
-        this.loaded = true;
+        this.player.loadPlayer();
     }
 
     unload() {
@@ -51,13 +38,12 @@ class GameScene extends Scene {
 
     render(ctx: CanvasRenderingContext2D): void {
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        if (!this.loaded) {
-            return;
-        }
-        const playerSprite: Sprite | undefined = resources.sprites['player'];
-        if (playerSprite) {
-            playerSprite.draw(ctx, this.player.pos);
-        }
+        this.player.renderPlayer(ctx);
+        // const playerSprite: Sprite | undefined = resources.sprites['player'];
+        // //console.log(resources.loadComplete());
+        // if (playerSprite && playerSprite.image.complete) {
+        //     playerSprite.draw(ctx, this.player.pos);
+        // }
     }
 }
 

@@ -11,8 +11,9 @@ class Player {
         this.inputKey = {
             a: false, d: false, w: false, s: false
         };
-        this.animState = "none";
+        this.animState = null;
         this.state = "idle";
+        this.sprite = resources.sprites["player"];
         this.start();
     }
     start() {
@@ -56,28 +57,36 @@ class Player {
             this.velocity = new Vector2(0, 0);
         }
     }
+    loadPlayer() {
+        const playerSprite = resources.sprites["player"];
+        playerSprite.animations({
+            idle: { from: 0, to: 5, loop: true },
+            walkHorizontal: { from: 24, to: 29, loop: true },
+            walkSouth: { from: 18, to: 23, loop: true },
+            walkNorth: { from: 30, to: 35, loop: true }
+        });
+    }
     renderPlayer(ctx) {
+        //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        const playerSprite = resources.sprites['player'];
+        //console.log(resources.loadComplete());
+        if (playerSprite && playerSprite.image.complete) {
+            playerSprite.draw(ctx, this.pos);
+        }
     }
     animations() {
         const playerSprite = resources.sprites["player"];
         if (this.moving) {
-            if (this.moveDirection.x !== 0) {
-                this.state = "walkHorizontal";
-                if (this.moveDirection.x < 0) {
-                    playerSprite.flipX = true;
-                }
-                else if (this.moveDirection.x > 0) {
-                    playerSprite.flipX = false;
-                }
-            }
             if (this.moveDirection.y > 0) {
                 this.state = "walkSouth";
             }
             else if (this.moveDirection.y < 0) {
                 this.state = "walkNorth";
             }
-            //console.log(this.state, this.moveDirection);
-            //this.state = "walk";
+            else if (this.moveDirection.x !== 0) {
+                this.state = "walkHorizontal";
+                playerSprite.flipX = (this.moveDirection.x >= 0) ? false : true;
+            }
         }
         else {
             this.state = "idle";
