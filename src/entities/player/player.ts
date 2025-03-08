@@ -1,15 +1,16 @@
 import { Vector2 } from "../../utils/vector2.js";
 import { playerInput } from "./playerInput.js";
+import { resources } from "../../utils/resources.js";
 
 class Player {
     pos: Vector2;
     speed: number;
     velocity: Vector2;
-    
     moveDirection: Vector2;
     moving: boolean;
-
     inputKey: Record<string, boolean>;
+    animState: string;
+    state: string;
 
     constructor(pos: Vector2, speed: number) {
         this.pos = pos;
@@ -23,6 +24,8 @@ class Player {
         this.inputKey = {
             a: false, d: false, w: false, s: false
         }
+        this.animState = "none";
+        this.state = "idle";
         this.start();
     }
 
@@ -32,6 +35,7 @@ class Player {
     
     public update(deltaTime: number) {
         this.checkInput();
+        this.animations();
     }
     
     public fixedUpdate(fixedDeltaTime: number) {
@@ -69,6 +73,34 @@ class Player {
         }
         else {
             this.velocity = new Vector2(0, 0);
+        }
+    }
+
+    renderPlayer(ctx: HTMLCanvasElement) {
+
+    }
+
+    animations() {
+        const playerSprite = resources.sprites["player"];
+        if (this.moving) {
+            this.state = "walk";
+        }
+        else {
+            this.state = "idle";
+        }
+        if (this.state !== this.animState) {
+            //playerSprite.playing = false;
+            this.animState = this.state;
+            switch (this.animState) {
+                case "idle":
+                    console.log(this.animState);
+                    playerSprite.play({from: 0, to: 5, loop: true})
+                    break;
+                case "walk":
+                    console.log(this.animState);
+                    playerSprite.play({from: 18, to: 23, loop: true})
+                    break;
+            }
         }
     }
 }

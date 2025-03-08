@@ -3,7 +3,8 @@ import { Vector2 } from "./vector2.js";
 interface Animation {
     from: number,
     to: number,
-    loop: boolean
+    loop: boolean,
+    speed?: number,
 }
 
 class Sprite {
@@ -16,7 +17,8 @@ class Sprite {
     frameWidth: number;
     frameHeight: number;
     playing: boolean;
-    stopPlay: boolean;
+    anims: Record<string, Animation>;
+    animID: number | null;
     constructor
     (
         image: HTMLImageElement,
@@ -35,7 +37,8 @@ class Sprite {
         this.frameWidth = this.image.width/cols;
         this.frameHeight = this.image.height/rows;
         this.playing = false;
-        this.stopPlay = false;
+        this.anims = {};
+        this.animID = null;
     }
 
     draw(ctx: CanvasRenderingContext2D, pos: Vector2) {
@@ -53,32 +56,31 @@ class Sprite {
     }
 
     animations(anims: Record<string, Animation>) {
-        for (const key of Object.keys(anims)) {
-
-        }
+        Object.assign(this.anims, anims);
     }
 
     play(anim: Animation) {
+        this.stop();
         this.frame = anim.from;
         this.playing = true;
 
-        const interval = 300;
-        let lastTime = performance.now();
-        const loop = (currentTime: number) => {            
-            //stops anim when stop() function is invoked
-            if (this.stopPlay) {
-                this.stopPlay = false;
-                return;
+        let interval = 300;
+        if (anim.speed) { //if speed is set
+            if (anim.speed < 0) {
+                console.error('speed cannot be less than 0');
             }
-
+            interval = Math.abs(anim.speed*20);
+        }
+        let lastTime = performance.now();
+        const loop = (currentTime: number) => {
             //play at certain speed
             const deltaTime = currentTime - lastTime;
             if (deltaTime < interval) {
-                requestAnimationFrame(loop);
+                this.animID = requestAnimationFrame(loop);
                 return;
             }
             lastTime = currentTime;
-
+            
             //update frame
             if (this.frame >= anim.to) {
                 this.frame = anim.from;
@@ -86,10 +88,9 @@ class Sprite {
             else {
                 this.frame++;
             }
-
-            //loop frame if loop is set to true
+            
             if (anim.loop) {
-                requestAnimationFrame(loop.bind(this));
+                this.animID = requestAnimationFrame(loop);
             }
             else {
                 this.playing = false;
@@ -99,7 +100,9 @@ class Sprite {
     }
 
     stop() {
-        this.stopPlay = true;
+        if (this.animID !== null) {
+            cancelAnimationFrame(this.animID);
+        }
     }
 }
 

@@ -30,9 +30,7 @@ class Resources {
             }
             
             this.images[key] = image;
-            const sprite = new Sprite(
-                image, 10, 10, 6, 0,
-            )
+            const sprite = new Sprite(image, 10, 10, 6, 0)
             this.sprites[key] = sprite;
         }
     }

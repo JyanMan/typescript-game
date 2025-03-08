@@ -45,13 +45,14 @@ class GameScene extends Scene {
         const playerSprite = resources.sprites['player'];
         if (playerSprite) {
             playerSprite.draw(ctx, this.player.pos);
-            if (!playerSprite.playing) {
-                playerSprite.play({
-                    from: 0,
-                    to: 5,
-                    loop: true
-                });
-            }
+            // if (!playerSprite.playing) {
+            //     playerSprite.play({
+            //         from: 0,
+            //         to: 5,
+            //         loop: true,
+            //         speed: 15,
+            //     })
+            // }
         }
     }
 }
