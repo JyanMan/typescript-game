@@ -2,15 +2,7 @@ import Sprite from "./Sprite.js";
 import { Vector2 } from "./vector2.js";
 
 class TileRenderer {
-    // tileAtlas: Sprite;
-    // mapLayout: Array<Array<number>>; 
-    // constructor(tileAtlas: Sprite, mapLayout: Array<Array<number>>) {
-    //     //for testingg purposes
-    //     this.tileAtlas = tileAtlas;
-    //     this.mapLayout = mapLayout;
-        
-    // }
-
+    
     renderTiles(ctx: CanvasRenderingContext2D, tileAtlas: Sprite, mapLayout: Array<Array<number>>) {
         if (!tileAtlas.image.complete) {
             return;

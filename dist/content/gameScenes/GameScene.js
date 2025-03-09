@@ -4,9 +4,12 @@ import { resources } from "../../utils/resources.js";
 import { tileRenderer } from "../../utils/Tilemap.js";
 import Player from "../../entities/player/player.js";
 const firstMap = [
-    [0, 1, 1, 1, 1, 1, 2],
-    [3, 4, 4, 4, 4, 4, 5],
-    [3, 4, 4, 4, 4, 4, 5]
+    [0, 1, 1, 1, 1, 1, 1, 2],
+    [3, 4, 4, 4, 4, 4, 4, 5],
+    [3, 4, 4, 4, 4, 4, 4, 5],
+    [3, 4, 4, 4, 4, 4, 4, 5],
+    [3, 4, 4, 4, 4, 4, 4, 5],
+    [3, 4, 4, 4, 4, 4, 4, 5],
 ];
 class GameScene extends Scene {
     constructor(ctx) {
