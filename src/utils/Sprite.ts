@@ -9,10 +9,10 @@ interface Animation {
 
 class Sprite {
     public image: HTMLImageElement;
+    public frame: number;
     rows: number;
     cols: number;
     scale: number;
-    frame: number;
     maxFrames: number;
     frameWidth: number;
     frameHeight: number;
@@ -21,6 +21,7 @@ class Sprite {
     animID: number | null;
     currentAnim: string;
     flipX: boolean;
+    imageSize: number;
     constructor
     (
         image: HTMLImageElement,
@@ -35,7 +36,8 @@ class Sprite {
         this.scale = scale;
         this.frame = frame;
         this.maxFrames = (rows*cols)-1;
-
+        
+        this.imageSize = 100*this.scale; //100 is just preference
         this.frameWidth = this.image.width/cols;
         this.frameHeight = this.image.height/rows;
         this.playing = false;
@@ -55,7 +57,7 @@ class Sprite {
         const frameY = Math.floor(this.frame/this.cols);
         const frameWidth = this.frameWidth;
         const frameHeight = this.frameHeight;
-        const imageSize = this.image.width*this.scale;
+        const imageSize = this.imageSize;
         
         const drawImage = (posX: number, imageSize: number) => {
             ctx.drawImage(
@@ -65,15 +67,15 @@ class Sprite {
             );
         }
 
-        ctx.save();
         if (this.flipX) {
+            ctx.save();
             ctx.scale(-1, 1);
             drawImage(-pos.x, -imageSize)
+            ctx.restore();
         }
         else {
             drawImage(pos.x, imageSize);
         }
-        ctx.restore();
     }
 
     animations(anims: Record<string, Animation>) {

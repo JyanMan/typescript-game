@@ -20,10 +20,18 @@ class Resources {
             player: {
                 src: "assets/Cute_Fantasy_Free/Player/Player.png",
                 isLoaded: false,
-                scale: 1,
+                scale: 1.5,
                 rows: 10,
                 cols: 6,
                 frame: 0,
+            },
+            firstMap: {
+                src: "assets/Cute_Fantasy_Free/Tiles/Cliff_Tile.png",
+                isLoaded: false,
+                scale: 1,
+                rows: 6,
+                cols: 3,
+                frame: 0
             }
         }
         this.requiredToLoad = 0;
@@ -43,7 +51,6 @@ class Resources {
             const rows = value.rows ?? 1;
             const cols = value.cols ?? 1;
             const frame = value.frame ?? 0;
-
             
             const sprite = new Sprite(image, scale, rows, cols, frame)
             // image.onload = () => {
