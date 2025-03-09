@@ -25,7 +25,7 @@ class Resources {
                 cols: 6,
                 frame: 0,
             },
-            firstMap: {
+            cliffTile: {
                 src: "assets/Cute_Fantasy_Free/Tiles/Cliff_Tile.png",
                 isLoaded: false,
                 scale: 1,
@@ -53,12 +53,6 @@ class Resources {
             const frame = value.frame ?? 0;
             
             const sprite = new Sprite(image, scale, rows, cols, frame)
-            // image.onload = () => {
-                //     this.alreadyLoaded++;
-                //     console.log(performance.now());
-                //     this.toLoad[key].isLoaded = true;
-                
-                // }
             this.sprites[key] = sprite;
         }
     }

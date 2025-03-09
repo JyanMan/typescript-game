@@ -49,7 +49,7 @@ class Sprite {
         this.stop();
         this.frame = anim.from;
         this.playing = true;
-        let interval = 200;
+        let interval = 100;
         if (anim.speed) { //if speed is set
             if (anim.speed < 0) {
                 console.error('speed cannot be less than 0');

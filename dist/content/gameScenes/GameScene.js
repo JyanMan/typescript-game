@@ -39,7 +39,7 @@ class GameScene extends Scene {
     render(ctx) {
         const camPos = this.camera.pos;
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        tileRenderer.renderTiles(ctx, resources.sprites["firstMap"], firstMap, this.camera);
+        tileRenderer.renderTiles(ctx, resources.sprites["cliffTile"], firstMap, this.camera);
         this.player.renderPlayer(ctx, this.player.pos.sub(camPos));
     }
 }
