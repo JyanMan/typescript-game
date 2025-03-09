@@ -1,6 +1,6 @@
 import { Vector2 } from "./vector2.js";
 class TileRenderer {
-    renderTiles(ctx, tileAtlas, mapLayout) {
+    renderTiles(ctx, tileAtlas, mapLayout, camPos) {
         if (!tileAtlas.image.complete) {
             return;
         }
@@ -8,7 +8,7 @@ class TileRenderer {
             for (let j = 0; j < mapLayout[i].length; j++) {
                 const value = mapLayout[i][j];
                 tileAtlas.frame = value;
-                tileAtlas.draw(ctx, new Vector2(tileAtlas.imageSize * j, tileAtlas.imageSize * i));
+                tileAtlas.draw(ctx, new Vector2(tileAtlas.imageSize * j, tileAtlas.imageSize * i).add(camPos));
             }
         }
     }

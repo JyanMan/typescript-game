@@ -13,6 +13,8 @@ class Player {
     animState: string | null;
     state: string;
     sprite: Sprite;
+    width: number;
+    height: number
 
     constructor(pos: Vector2, speed: number) {
         this.pos = pos;
@@ -26,6 +28,8 @@ class Player {
         this.animState = null;
         this.state = "idle";
         this.sprite = resources.sprites["player"];
+        this.width = 100;
+        this.height = 100;
         this.start();
     }
 
@@ -86,12 +90,12 @@ class Player {
         })
     }
 
-    renderPlayer(ctx: CanvasRenderingContext2D) {
+    renderPlayer(ctx: CanvasRenderingContext2D, pos: Vector2) {
         //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         const playerSprite: Sprite | undefined = resources.sprites['player'];
         //console.log(resources.loadComplete());
         if (playerSprite && playerSprite.image.complete) {
-            playerSprite.draw(ctx, this.pos);
+            playerSprite.draw(ctx, pos);
         }
     }
 

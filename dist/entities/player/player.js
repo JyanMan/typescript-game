@@ -14,6 +14,8 @@ class Player {
         this.animState = null;
         this.state = "idle";
         this.sprite = resources.sprites["player"];
+        this.width = 100;
+        this.height = 100;
         this.start();
     }
     start() {
@@ -66,12 +68,12 @@ class Player {
             walkNorth: { from: 30, to: 35, loop: true }
         });
     }
-    renderPlayer(ctx) {
+    renderPlayer(ctx, pos) {
         //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         const playerSprite = resources.sprites['player'];
         //console.log(resources.loadComplete());
         if (playerSprite && playerSprite.image.complete) {
-            playerSprite.draw(ctx, this.pos);
+            playerSprite.draw(ctx, pos);
         }
     }
     animations() {
